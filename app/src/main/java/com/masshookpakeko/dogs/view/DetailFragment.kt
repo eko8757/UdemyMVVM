@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 
 import com.masshookpakeko.dogs.R
+import com.masshookpakeko.dogs.utils.getProgressDrawable
+import com.masshookpakeko.dogs.utils.loadImage
 import com.masshookpakeko.dogs.viewmodel.DetailViewModel
 import kotlinx.android.synthetic.main.fragment_detail.*
 
@@ -19,7 +21,8 @@ import kotlinx.android.synthetic.main.fragment_detail.*
  */
 class DetailFragment : Fragment() {
 
-    private lateinit var viewModel : DetailViewModel
+    private lateinit var viewModel: DetailViewModel
+    private var dogUuid = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,19 +35,24 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        arguments?.let {
+            dogUuid = DetailFragmentArgs.fromBundle(it).dogUuid
+        }
+
         viewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
-        viewModel.fetch()
+        viewModel.fetch(dogUuid)
 
         observeViewModel()
     }
 
     private fun observeViewModel() {
-        viewModel.detailViewModel.observe(this, Observer {dog ->
+        viewModel.detailViewModel.observe(this, Observer { dog ->
             dog?.let {
-                tv_dog_name_detail.text = dog.dogBreed
-                tv_dog_purpose_detail.text = dog.breedFor
+                tv_dog_name_detail.text = dog.name
+                tv_dog_purpose_detail.text = dog.bredFor
                 tv_dog_temperament_detail.text = dog.temperament
                 tv_dog_lifespan_detail.text = dog.lifeSpan
+                context?.let { img_dog_detail.loadImage(dog.url, getProgressDrawable(it)) }
             }
         })
     }

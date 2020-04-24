@@ -39,7 +39,9 @@ class DogListAdapter(val items: ArrayList<ResponseDog>) : RecyclerView.Adapter<D
             itemView.tv_name_list_dog.text = data.name
             itemView.tv_lifespan_dog_list.text = data.lifeSpan
             itemView.setOnClickListener {
-                Navigation.findNavController(it).navigate(ListFragmentDirections.actionDetailFragment())
+                val actions = ListFragmentDirections.actionDetailFragment()
+                actions.dogUuid = data.uuid
+                Navigation.findNavController(it).navigate(actions)
             }
         }
     }

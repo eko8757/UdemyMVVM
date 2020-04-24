@@ -1,15 +1,19 @@
 package com.masshookpakeko.dogs.viewmodel
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.masshookpakeko.dogs.model.DogBreed
+import com.masshookpakeko.dogs.model.ResponseDog
+import com.masshookpakeko.dogs.model.local.DogDatabase
+import kotlinx.coroutines.launch
 
-class DetailViewModel: ViewModel() {
+class DetailViewModel(application: Application) : BaseViewModel(application) {
 
-    val detailViewModel = MutableLiveData<DogBreed>()
+    val detailViewModel = MutableLiveData<ResponseDog>()
 
-    fun fetch() {
-        val dog = DogBreed("1", "Corgi", "15 years", "breedGroup", "breedFor", "temperament", "")
-        detailViewModel.value = dog
+    fun fetch(uuid: Int) {
+        launch {
+            val dog = DogDatabase(getApplication()).dogDao().getDog(uuid)
+            detailViewModel.value = dog
+        }
     }
 }

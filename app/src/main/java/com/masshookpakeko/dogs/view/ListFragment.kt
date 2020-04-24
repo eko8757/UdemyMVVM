@@ -47,7 +47,7 @@ class ListFragment : Fragment() {
             tv_error_load_data.gone()
             progress_dog_list.visible()
 
-            viewModel.refresh()
+            viewModel.refreshFromPassCache()
             swipeRefresh_list.isRefreshing = false
         }
 

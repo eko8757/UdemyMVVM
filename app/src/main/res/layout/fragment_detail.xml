@@ -2,6 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <data>
+        <variable
+            name="dog"
+            type="com.masshookpakeko.dogs.model.ResponseDog" />
+    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:src="@drawable/ic_dogs"
+            android:imageUrl="@{dog.url}"
             android:scaleType="fitCenter"
             android:minHeight="200dp"/>
 
@@ -22,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/img_dog_detail"
-            android:text="@string/dog_name"
+            android:text="@{dog.name}"
             android:layout_margin="4dp"
             android:textStyle="bold"
             android:layout_centerHorizontal="true"/>
@@ -32,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_dog_name_detail"
-            android:text="@string/dog_name"
+            android:text="@{dog.bredFor}"
             android:layout_margin="4dp"
             android:layout_centerHorizontal="true"/>
 
@@ -41,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_dog_purpose_detail"
-            android:text="@string/dog_name"
+            android:text="@{dog.temperament}"
             android:layout_margin="4dp"
             android:layout_centerHorizontal="true"/>
 
@@ -50,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_dog_temperament_detail"
-            android:text="@string/dog_name"
+            android:text="@{dog.lifeSpan}"
             android:layout_margin="4dp"
             android:layout_centerHorizontal="true"/>
 

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.masshookpakeko.dogs.R
 import com.masshookpakeko.dogs.databinding.ItemDogListBinding
 import com.masshookpakeko.dogs.model.ResponseDog
-import com.masshookpakeko.dogs.view.ClickListener
+import com.masshookpakeko.dogs.utils.ClickListener
 import com.masshookpakeko.dogs.view.ListFragmentDirections
 import kotlinx.android.synthetic.main.item_dog_list.view.*
 
@@ -33,7 +33,8 @@ class DogListAdapter(val items: ArrayList<ResponseDog>) : RecyclerView.Adapter<D
         holder.bindData(items[position])
     }
 
-    class ViewHolder(var view: ItemDogListBinding) : RecyclerView.ViewHolder(view.root), ClickListener {
+    class ViewHolder(var view: ItemDogListBinding) : RecyclerView.ViewHolder(view.root),
+        ClickListener {
 
         override fun onClicked(v: View) {
             val uuid = v.dogId.text.toString().toInt()

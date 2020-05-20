@@ -1,4 +1,4 @@
-package com.masshookpakeko.dogs.view
+package com.masshookpakeko.dogs.utils
 
 import android.view.View
 
